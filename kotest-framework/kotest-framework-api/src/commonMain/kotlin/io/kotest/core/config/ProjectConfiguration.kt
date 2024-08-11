@@ -10,6 +10,7 @@ import io.kotest.core.spec.SpecExecutionOrder
 import io.kotest.core.test.AssertionMode
 import io.kotest.core.test.EnabledIf
 import io.kotest.core.test.EnabledOrReasonIf
+import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestCaseOrder
 import io.kotest.core.test.TestCaseSeverityLevel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -356,4 +357,12 @@ class ProjectConfiguration {
    var enabledIf: EnabledIf? = null
 
    var enabledOrReasonIf: EnabledOrReasonIf? = null
+
+   var retries: Int? = Defaults.defaultRetries
+
+   var retryFn: ((TestCase) -> Int)? = Defaults.defaultRetriesFn
+
+   var retryDelay: Duration? = Defaults.defaultRetryDelay
+
+   var retryDelayFn: ((TestCase, Int) -> Duration)? = Defaults.defaultRetryDelayFn
 }
