@@ -18,29 +18,6 @@ dependencyResolutionManagement {
          mavenContent { snapshotsOnly() }
       }
 
-      //region workaround for https://youtrack.jetbrains.com/issue/KT-51379
-      // FIXME remove when updating to Kotlin 2.0
-      ivy("https://download.jetbrains.com/kotlin/native/builds") {
-         name = "KotlinNative"
-         patternLayout {
-            listOf(
-               "macos-x86_64",
-               "macos-aarch64",
-               "osx-x86_64",
-               "osx-aarch64",
-               "linux-x86_64",
-               "windows-x86_64",
-            ).forEach { os ->
-               listOf("dev", "releases").forEach { stage ->
-                  artifact("$stage/[revision]/$os/[artifact]-[revision].[ext]")
-               }
-            }
-         }
-         content { includeModuleByRegex(".*", ".*kotlin-native-prebuilt.*") }
-         metadataSources { artifact() }
-      }
-      //endregion
-
       //region Declare the Node.js & Yarn download repositories
       // Workaround https://youtrack.jetbrains.com/issue/KT-68533/
       ivy("https://nodejs.org/dist/") {
@@ -129,17 +106,18 @@ include(
    ":kotest-tests:kotest-tests-concurrency-tests",
    ":kotest-tests:kotest-tests-concurrency-specs",
 
-   ":kotest-tests:kotest-tests-junitxml",
+   ":kotest-tests:kotest-tests-config-classname",
    ":kotest-tests:kotest-tests-htmlreporter",
+   ":kotest-tests:kotest-tests-junitxml",
+   ":kotest-tests:kotest-tests-multiname-test-name-sysprop",
    ":kotest-tests:kotest-tests-multipleconfig",
-   ":kotest-tests:kotest-tests-test-parallelism",
+   ":kotest-tests:kotest-tests-power-assert",
    ":kotest-tests:kotest-tests-spec-parallelism",
    ":kotest-tests:kotest-tests-tagextension",
    ":kotest-tests:kotest-tests-timeout-project",
    ":kotest-tests:kotest-tests-timeout-sysprop",
-   ":kotest-tests:kotest-tests-multiname-test-name-sysprop",
+   ":kotest-tests:kotest-tests-test-parallelism",
 //   ":kotest-tests:kotest-tests-js",
-   ":kotest-tests:kotest-tests-config-classname",
 
    // BOM for whole kotest project
    ":kotest-bom",
